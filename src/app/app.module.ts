@@ -15,6 +15,7 @@ import {AuthGuard} from "./utils/guards/auth.guard";
 import {NoAuthGuard} from "./utils/guards/notauth.guard";
 import {AuthInterceptor} from "./utils/interceptors/auth.interceptor";
 import {LicenseManager} from "ag-grid-enterprise";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 LicenseManager.setLicenseKey('');
@@ -36,6 +37,7 @@ LicenseManager.setLicenseKey('');
     NgxsStoragePluginModule.forRoot({
       key: ['auth.token', 'auth.user'],
     }),
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthGuard,
