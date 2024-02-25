@@ -3,11 +3,12 @@ import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {InfoUser, Login, Logout} from './auth.actions';
 import {AuthService} from "../../services/auth/auth.service";
 import {tap} from "rxjs";
-import {IInfoUser} from "../../core/interfaces/auth.interfaces";
+import {IUser} from "../../core/interfaces/user.interfaces";
+
 
 interface AuthStateModel {
   token: string | null;
-  user: IInfoUser | null;
+  user: IUser | null;
 }
 
 @State<AuthStateModel>({
@@ -31,6 +32,11 @@ export class AuthState {
     return !!state.token;
   }
 
+  @Selector()
+  static getInfoUser(state: AuthStateModel) {
+    return state.user;
+  }
+
   constructor(
     private authService: AuthService,
     private store: Store
@@ -41,7 +47,7 @@ export class AuthState {
   login(ctx: StateContext<AuthStateModel>, action: Login) {
     return this.authService.login(action.payload).pipe(
       tap({
-        next: (result: { token: string, userId: number }) => {
+        next: (result: { token: string }) => {
           this.handleLoginSuccess(ctx, result);
         },
         error: (error: any) => {
@@ -51,11 +57,11 @@ export class AuthState {
     );
   }
 
-  private handleLoginSuccess(ctx: StateContext<AuthStateModel>, result: { token: string, userId: number }) {
+  private handleLoginSuccess(ctx: StateContext<AuthStateModel>, result: { token: string }) {
     ctx.patchState({
       token: result.token,
     });
-    this.store.dispatch(new InfoUser(result.userId));
+    this.store.dispatch(new InfoUser());
   }
 
   private handleLoginError(ctx: StateContext<AuthStateModel>) {
@@ -73,11 +79,11 @@ export class AuthState {
   }
 
   @Action(InfoUser)
-  getInfoUser(ctx: StateContext<AuthStateModel>, {id}: InfoUser) {
-    return this.authService.getInfouser(id).pipe(
+  getInfoUser(ctx: StateContext<AuthStateModel>) {
+    return this.authService.getInfouser().pipe(
       tap(res => {
         ctx.patchState({
-          user: res.data
+          user: res
         })
       })
     );

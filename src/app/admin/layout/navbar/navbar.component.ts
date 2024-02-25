@@ -1,10 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 import {Router} from "@angular/router";
 import {SweetAlertHelper} from "../../../utils/helpers/sweet-alert-helper.service";
 import {Store} from "@ngxs/store";
 import {Logout} from "../../../redux/auth/auth.actions";
 import * as moment from "moment";
+import {AuthState} from "../../../redux/auth/auth.state";
+import {IUser} from "../../../core/interfaces/user.interfaces";
 
 @Component({
   selector: 'app-navbar',
@@ -16,9 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   viewSidebar: boolean | undefined;
 
-  username = '';
-  date = '';
-  hour = '';
+  user: IUser | undefined;
 
   constructor(
     private store: Store,
@@ -28,7 +28,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getHours();
+    this.store.select(AuthState.getInfoUser)
+      .pipe(takeUntil(this.destroy))
+      .subscribe((res) => {
+        if (res) {
+          this.user = res;
+        }
+      })
   }
 
   logout() {
@@ -51,13 +57,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     //this.store.dispatch( new SidebarView( !this.viewSidebar ) );
   }
 
-  getHours() {
-    setInterval(() => {
-      const fecha = new Date();
-      this.date = moment(fecha).format('dddd, DD MMMM YYYY');
-      this.hour = moment(fecha).format('hh:mm:ss A');
-    }, 1000);
-  }
 
   ngOnDestroy(): void {
     this.destroy.next(true);

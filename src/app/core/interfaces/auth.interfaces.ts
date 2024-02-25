@@ -15,28 +15,5 @@ export interface ILoginData {
   password: string;
 }
 
-export interface IInfoUser {
-  id: number;
-  name: string;
-  email: string;
-  permissions: Permission[];
-}
 
-export interface Permission {
-  id: number;
-  name: string;
-  actions: Action[];
-}
 
-export interface Action {
-  id: number;
-  name: Name;
-  state: boolean;
-}
-
-export enum Name {
-  Create = "create",
-  Delete = "delete",
-  Show = "show",
-  Update = "update",
-}

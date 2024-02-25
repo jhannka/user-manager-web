@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {AdminRoutingModule} from './admin-routing.module';
 import {LayoutModule} from "./layout/layout.module";
 import {NgxsModule} from "@ngxs/store";
+import {UserState} from "../redux/user/user.state";
 
 
 @NgModule({
@@ -11,7 +12,9 @@ import {NgxsModule} from "@ngxs/store";
   imports: [
     CommonModule,
     AdminRoutingModule,
-    NgxsModule.forFeature([]),
+    NgxsModule.forFeature([
+      UserState
+    ]),
     LayoutModule
   ]
 })

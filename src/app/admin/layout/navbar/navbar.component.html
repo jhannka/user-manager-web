@@ -5,9 +5,9 @@
   <span class="ml-2">
     <img [src]="'assets/images/faces/face4.jpg'" matTooltip="Perfil" class="rounded-circle float-left">
         <p>
-      {{ username | uppercase }} <br>
-      <i>{{ date }}</i> <br>
-      <i>{{ hour }}</i>
+      {{ user?.name | uppercase }} <br>
+          <i>{{ user?.email }}</i> <br>
+      <i>{{ user?.identification_card }}</i>
     </p>
   </span>
   <span class="example-spacer"></span>

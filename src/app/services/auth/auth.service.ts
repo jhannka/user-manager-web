@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {IInfoUser, ILoginData, IToken, IUser} from "../../core/interfaces/auth.interfaces";
+import {ILoginData, IToken} from "../../core/interfaces/auth.interfaces";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
 import {CONSTANT} from "../../app.constants";
 import {IResponse} from "../../core/interfaces/response.interface";
+import {IUser} from "../../core/interfaces/user.interfaces";
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +15,15 @@ export class AuthService {
 
   login(data: ILoginData): Observable<IToken> {
 
-    const user: IUser = {
-      email: data.email,
-      password: data.password,
-      client_id: environment.client_id,
-      client_secret: environment.client_secret,
-    };
 
-    const body = JSON.stringify(user);
+    //const body = JSON.stringify(user);
     const url = CONSTANT.AUTH.URL.LOGIN;
 
-    return this.http.post<IToken>(url, body);
+    return this.http.post<IToken>(url, data);
   }
 
-  getInfouser(id: number): Observable<IResponse<IInfoUser>> {
-    const url = `${CONSTANT.AUTH.URL.INFOUSER}/${id}`;
-    return this.http.get<IResponse<IInfoUser>>(url);
+  getInfouser(): Observable<IUser> {
+    const url = `${CONSTANT.AUTH.URL.INFOUSER}`;
+    return this.http.get<IUser>(url);
   }
 }

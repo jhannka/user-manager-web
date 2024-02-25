@@ -8,7 +8,7 @@ export class Login {
 export class InfoUser {
   static readonly type = '[Auth] Info User';
 
-  constructor( public id: number ) {
+  constructor(  ) {
   }
 }
 

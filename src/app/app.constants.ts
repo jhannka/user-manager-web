@@ -12,4 +12,9 @@ export const CONSTANT = {
       INFOUSER: EndPoint('user/auth')
     }
   },
+  USER: {
+    URL: {
+      BASE: EndPoint('users')
+    }
+  }
 }
