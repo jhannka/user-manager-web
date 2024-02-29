@@ -51,11 +51,10 @@ export class AuthInterceptor implements HttpInterceptor {
   private handleError(error: any) {
     this.store.dispatch(new StopLoadingAction());
 
-
     if (error.error.error === '') {
       this.handleTokenError();
     } else {
-      this.handleUnexpectedError(error.error);
+      this.handleUnexpectedError(error.error.error);
     }
 
   }
@@ -65,10 +64,10 @@ export class AuthInterceptor implements HttpInterceptor {
     this.router.navigate(['/auth']);
   }
 
-  private handleUnexpectedError(error: IError) {
+  private handleUnexpectedError(error: string) {
     this.sweetAlertHelper.createCustomAlert({
       title: 'Ocurrió algo inesperado',
-      text: error.message,
+      text: error,
       icon: 'error'
     });
   }

@@ -11,6 +11,7 @@ import {CityCellRendererComponent} from "../../../components/city-cell-renderer/
 import {
   DeparTamentCellRendererComponent
 } from "../../../components/depar-tament-cell-renderer/depar-tament-cell-renderer.component";
+import {SweetAlertHelper} from "../../../../utils/helpers/sweet-alert-helper.service";
 
 @Component({
   selector: 'app-user',
@@ -25,7 +26,8 @@ export class UserComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
-    public dialogForm: MatDialog
+    public dialogForm: MatDialog,
+    private sweetAlertHelper: SweetAlertHelper,
   ) {
     this.store.dispatch(new UserGetAction);
     this.loadGrid();
@@ -92,7 +94,7 @@ export class UserComponent implements OnInit, OnDestroy {
             name: 'Elimina Usuario',
             icon: '',
             action: () => {
-              this.store.dispatch(new UserDeleteAction(user));
+              this.deleteUser(user);
             },
           },
           'separator',
@@ -114,6 +116,23 @@ export class UserComponent implements OnInit, OnDestroy {
           this.store.dispatch(new UserGetAction);
         }
       });
+  }
+
+  deleteUser(user: number) {
+    this.sweetAlertHelper.createCustomAlert({
+      title: '¿Seguro que desea eliminar este usuario?',
+      text: 'Eliminar Usuario',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((res) => {
+      if (res.value) {
+        this.store.dispatch(new UserDeleteAction(user));
+        this.store.dispatch(new UserGetAction);
+      }
+    });
   }
 
   ngOnDestroy(): void {
