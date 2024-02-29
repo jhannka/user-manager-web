@@ -34,3 +34,10 @@ export class UserDeleteAction {
   constructor(public id: number) {
   }
 }
+
+export class ResetUserStateAction {
+  static readonly type = '[User] reset items';
+
+  constructor() {
+  }
+}

@@ -2,7 +2,14 @@ import {Injectable} from '@angular/core';
 import {State, Action, StateContext, Selector} from '@ngxs/store';
 import {IUser} from "../../core/interfaces/user.interfaces";
 import {UserService} from "../../services/user/user.service";
-import {UserAddAction, UserDeleteAction, UserGetAction, UserShowAction, UserUpdateAction} from "./user.actions";
+import {
+  ResetUserStateAction,
+  UserAddAction,
+  UserDeleteAction,
+  UserGetAction,
+  UserShowAction,
+  UserUpdateAction
+} from "./user.actions";
 import {tap} from "rxjs";
 
 interface UserStateModel {
@@ -85,6 +92,16 @@ export class UserState {
         ctx.patchState({})
       })
     );
+  }
+
+  @Action(ResetUserStateAction)
+  resetState(ctx: StateContext<ResetUserStateAction>) {
+    const currentState = ctx.getState();
+    ctx.setState({
+      ...currentState,
+      user: null
+    });
+
   }
 
 }
