@@ -8,8 +8,19 @@ const EndPoint = (resource: string): string => {
 export const CONSTANT = {
   AUTH: {
     URL: {
-      LOGIN: environment.url + 'auth/token',
+      LOGIN: environment.url + 'login',
       INFOUSER: EndPoint('user/auth')
     }
   },
+  USER: {
+    URL: {
+      BASE: EndPoint('users'),
+      RESET_PASSWORD: EndPoint('reset/password')
+    }
+  },
+  CATEGORY: {
+    URL: {
+      BASE: EndPoint('category'),
+    }
+  }
 }
