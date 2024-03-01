@@ -1,7 +1,7 @@
 export const navbarData = [
   {
     name: 'Inicio',
-    path: '/admin',
+    path: '/admin/home',
     icon: 'home',
   },
   {

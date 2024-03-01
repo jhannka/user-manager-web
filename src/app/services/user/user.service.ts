@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {CONSTANT} from "../../app.constants";
 import {IResponse} from "../../core/interfaces/response.interface";
-import {IUser} from "../../core/interfaces/user.interfaces";
+import {IResetPassword, IUser} from "../../core/interfaces/user.interfaces";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -37,5 +37,11 @@ export class UserService {
   destroy(id: number) {
     const url = `${this.url}/${id}`;
     return this.http.delete(url);
+  }
+
+  resetPassword(data: IResetPassword) {
+    const {id, ...dataWitouhId} = data;
+    const url = `${CONSTANT.USER.URL.RESET_PASSWORD}/${id}`;
+    return this.http.put(url, dataWitouhId);
   }
 }

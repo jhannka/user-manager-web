@@ -3,6 +3,7 @@ import {State, Action, StateContext, Selector} from '@ngxs/store';
 import {IUser} from "../../core/interfaces/user.interfaces";
 import {UserService} from "../../services/user/user.service";
 import {
+  ResetPasswordStateAction,
   ResetUserStateAction,
   UserAddAction,
   UserDeleteAction,
@@ -102,6 +103,15 @@ export class UserState {
       user: null
     });
 
+  }
+
+  @Action(ResetPasswordStateAction)
+  resetPassword(ctx: StateContext<UserStateModel>, {data}: ResetPasswordStateAction) {
+    return this.userService.resetPassword(data).pipe(
+      tap(res => {
+        ctx.patchState({})
+      })
+    );
   }
 
 }

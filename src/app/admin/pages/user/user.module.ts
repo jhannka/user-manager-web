@@ -16,12 +16,14 @@ import { MatNativeDateModule} from "@angular/material/core";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
   declarations: [
     UserComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

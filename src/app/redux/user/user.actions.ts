@@ -1,4 +1,4 @@
-import {IUser} from "../../core/interfaces/user.interfaces";
+import {IResetPassword, IUser} from "../../core/interfaces/user.interfaces";
 
 export class UserGetAction {
   static readonly type = '[User] Get item';
@@ -39,5 +39,12 @@ export class ResetUserStateAction {
   static readonly type = '[User] reset items';
 
   constructor() {
+  }
+}
+
+export class ResetPasswordStateAction {
+  static readonly type = '[User] reset password';
+
+  constructor(public data: IResetPassword) {
   }
 }

@@ -14,7 +14,8 @@ export const CONSTANT = {
   },
   USER: {
     URL: {
-      BASE: EndPoint('users')
+      BASE: EndPoint('users'),
+      RESET_PASSWORD: EndPoint('reset/password')
     }
   }
 }
