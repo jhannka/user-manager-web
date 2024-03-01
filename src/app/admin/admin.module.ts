@@ -6,6 +6,7 @@ import {LayoutModule} from "./layout/layout.module";
 import {NgxsModule} from "@ngxs/store";
 import {UserState} from "../redux/user/user.state";
 import {ApiColombiaState} from "../redux/api-colombia/api-colombia.state";
+import {CategoryState} from "../redux/category/category.state";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {ApiColombiaState} from "../redux/api-colombia/api-colombia.state";
     AdminRoutingModule,
     NgxsModule.forFeature([
       UserState,
-      ApiColombiaState
+      ApiColombiaState,
+      CategoryState
     ]),
     LayoutModule
   ]

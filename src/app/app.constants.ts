@@ -17,5 +17,10 @@ export const CONSTANT = {
       BASE: EndPoint('users'),
       RESET_PASSWORD: EndPoint('reset/password')
     }
+  },
+  CATEGORY: {
+    URL: {
+      BASE: EndPoint('category'),
+    }
   }
 }

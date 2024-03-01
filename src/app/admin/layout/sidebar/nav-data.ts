@@ -13,7 +13,7 @@ export const navbarData = [
   },
   {
     name: 'Generos',
-    path: '/admin/generos',
+    path: '/admin/category',
     icon: 'library_music',
     permission: ''
   },
