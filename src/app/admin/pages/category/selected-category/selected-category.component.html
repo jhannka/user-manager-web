@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="container row mt-4">
+    <div class="col col-12">
+      <h3>Seleccionar Genero</h3>
+      <hr class="w-100">
+    </div>
+  </div>
+  <div class="container">
+    <mat-form-field class="full-width" appearance="outline" floatLabel="always">
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip
+          *ngFor="let fruit of Categories"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(fruit)">
+          {{ fruit }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          #CategoryInput
+          #autocompleteTrigger="matAutocompleteTrigger"
+          [formControl]="categoryCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" autoActiveFirstOption>
+        <mat-option *ngFor="let category of filteredCategory | async" [value]="category">
+          <mat-checkbox color="primary" style="padding: 0 12px;"
+                        [checked]="Categories.indexOf(category) >= 0">
+
+          </mat-checkbox>
+          {{ category }}
+        </mat-option>
+      </mat-autocomplete>
+      <button mat-icon-button matSuffix style="width: 34px; height: 34px;" (click)="openAuto(autocompleteTrigger)">
+        <mat-icon style="width: 34px;">expand_more</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>
+

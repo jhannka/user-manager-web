@@ -13,12 +13,17 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
+import { SelectedCategoryComponent } from './selected-category/selected-category.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
   declarations: [
     CategoryComponent,
-    CategoryManagementComponent
+    CategoryManagementComponent,
+    SelectedCategoryComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +37,10 @@ import {MatSelectModule} from "@angular/material/select";
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatLegacyChipsModule,
+    MatCheckboxModule
   ]
 })
 export class CategoryModule { }

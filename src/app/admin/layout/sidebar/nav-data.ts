@@ -12,8 +12,14 @@ export const navbarData = [
     permission: 'admin'
   },
   {
-    name: 'Generos',
+    name: 'Categorias',
     path: '/admin/category',
+    icon: 'library_music',
+    permission: 'admin'
+  },
+  {
+    name: 'Seleccion Categorias',
+    path: '/admin/category/category',
     icon: 'library_music',
     permission: ''
   },
