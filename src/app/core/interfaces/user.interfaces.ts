@@ -10,6 +10,14 @@ export interface IUser {
   must_change_password: boolean;
   created_at?: Date;
   updated_at?: Date;
+  roles?: IRole[];
+}
+
+export interface IRole {
+  id: number;
+  name: string;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export interface IResetPassword {

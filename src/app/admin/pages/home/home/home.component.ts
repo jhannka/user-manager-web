@@ -13,6 +13,7 @@ import {ChangePasswordComponent} from "../../user/change-password/change-passwor
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private destroy: Subject<boolean> = new Subject<boolean>();
+  rol = '';
 
   constructor(
     private store: Store,
@@ -24,12 +25,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.store.select(AuthState.getInfoUser)
       .pipe(takeUntil(this.destroy))
       .subscribe(res => {
-        if (res?.must_change_password) {
-          this.onChangePassword();
+        if (res) {
+          const {roles, must_change_password: mustChangePassword} = res;
+          if (roles && roles.length > 0) {
+            this.rol = roles[0]?.name;
+          }
+          if (mustChangePassword) {
+            this.onChangePassword();
+          }
         }
-      })
-
+      });
   }
+
 
   onChangePassword() {
     this.dialogForm.open(ChangePasswordComponent, {

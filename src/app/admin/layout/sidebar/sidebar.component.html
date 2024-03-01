@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <mat-accordion class="app-nav-accordion">
     <ng-container *ngFor="let item of navData">
-      <mat-nav-list>
+      <mat-nav-list *ngIf="onPermission(item.permission)">
         <a mat-list-item routerLinkActive="active" [routerLink]="item.path">
           <p class="mb-0">
             <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
